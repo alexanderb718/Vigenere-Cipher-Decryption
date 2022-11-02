@@ -1,5 +1,5 @@
 /.vscode/
 file.txt
-*.exe
 *.o
+*.exe
 *.h.gch
