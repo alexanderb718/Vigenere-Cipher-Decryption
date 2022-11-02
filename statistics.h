@@ -13,7 +13,7 @@ typedef struct {
 
 size_t getNumChars(FILE*);
 char *getChars(FILE*, size_t);
-letter_frequency* do_frequency_analysis(char*, size_t, int, int);
+letter_frequency* do_frequency_analysis(char*, size_t, int, int, long*);
 letter_frequency get_highest_frequency(letter_frequency*);
 
 #endif
