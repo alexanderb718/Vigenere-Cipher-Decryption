@@ -49,8 +49,9 @@ char *getChars(FILE *fp, size_t length) {
 	return chars;
 }
 
-letter_frequency* do_frequency_analysis(char *chars, size_t length, int start, int skip) {
+letter_frequency* do_frequency_analysis(char *chars, size_t length, int start, int skip, long *total) {
 	letter_frequency *freq = (letter_frequency *) malloc(26 * sizeof(letter_frequency));
+	*total = 0;
 	
 	for(int i = 0; i < 26; i++) {
 		freq[i].frequency = 0;
@@ -62,6 +63,7 @@ letter_frequency* do_frequency_analysis(char *chars, size_t length, int start, i
 		c = chars[i];
 		if(c >= 'A' && c <= 'Z') {
 			freq[c - 'A'].frequency++;
+			(*total)++;
 		}
 	}
 
