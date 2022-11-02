@@ -25,21 +25,29 @@ int main(int argc, char *argv[]) {
 	char *chars = getChars(fp, num_chars);
 	fclose(fp);
 
-	char ch;
-	letter_frequency *freq;
-	letter_frequency max_frequency;
-	for(int i = 1; i <= skip; i++) {
-		freq = do_frequency_analysis(chars, num_chars, (i - 1), skip);
-		max_frequency = get_highest_frequency(freq);
+	char *res = run_frequency_analysis(chars, num_chars, skip);
 
-		ch = max_frequency.letter - 'E' + 'A';
-
-		printf("%c", ch);
-		
-		free(freq);
+	for(int i = 0; i < skip; i++) {
+		printf("%c", res[i]);
 	}
 
+	// char ch;
+	// letter_frequency *freq;
+	// letter_frequency max_frequency;
+	// long total;
+	// for(int i = 1; i <= skip; i++) {
+	// 	freq = do_frequency_analysis(chars, num_chars, (i - 1), skip, &total);
+	// 	max_frequency = get_highest_frequency(freq);
+
+	// 	ch = max_frequency.letter - 'E' + 'A';
+
+	// 	printf("%c", ch);
+		
+	// 	free(freq);
+	// }
+
 	free(chars);
+	free(res);
 
 	return 0;
 }
