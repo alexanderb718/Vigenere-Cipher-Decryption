@@ -1,5 +1,6 @@
 #include "statistics.h"
 
+// Returns the highest frequency character in the array
 letter_frequency get_highest_frequency(letter_frequency* frequencies) {
 	letter_frequency highest = frequencies[0];
 
@@ -12,6 +13,7 @@ letter_frequency get_highest_frequency(letter_frequency* frequencies) {
 	return highest;
 }
 
+// Gets number of characters in text file
 size_t getNumChars(FILE *fp) {
 	size_t length = 0;
 	char c;
@@ -29,6 +31,7 @@ size_t getNumChars(FILE *fp) {
 	return length;
 }
 
+// Gets characters from file and returns them as a character array
 char *getChars(FILE *fp, size_t length) {
 	char *chars = (char *) malloc(length * sizeof(char));
 
@@ -49,6 +52,7 @@ char *getChars(FILE *fp, size_t length) {
 	return chars;
 }
 
+// Performs frequency analysis on the string, returning an array listing the frequency of each character
 letter_frequency* do_frequency_analysis(char *chars, size_t length, int start, int skip) {
 	letter_frequency *freq = (letter_frequency *) malloc(26 * sizeof(letter_frequency));
 	
