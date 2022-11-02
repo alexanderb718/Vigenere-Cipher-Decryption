@@ -25,29 +25,54 @@ int main(int argc, char *argv[]) {
 	char *chars = getChars(fp, num_chars);
 	fclose(fp);
 
-	char *res = run_frequency_analysis(chars, num_chars, skip);
+	printf("How would you like for the key to be found?\n1) Max Frequency Comparison\n2) Frequency Matching\n");
+	
+	int choice = 0;
 
-	for(int i = 0; i < skip; i++) {
-		printf("%c", res[i]);
+	do {
+		scanf("%d", &choice);
+	} while(choice != 1 && choice != 2);
+
+	switch(choice) {
+		case 1: {
+			char ch;
+			letter_frequency *freq;
+			letter_frequency max_frequency;
+			long total;
+			printf("The key is: ");
+			for(int i = 1; i <= skip; i++) {
+				freq = do_frequency_analysis(chars, num_chars, (i - 1), skip, &total);
+				max_frequency = get_highest_frequency(freq);
+
+				ch = max_frequency.letter - 'E' + 'A';
+
+				printf("%c", ch);
+				
+				free(freq);
+			}
+			printf("\n");
+			break;
+		}
+		case 2: {
+			char *res = run_frequency_analysis(chars, num_chars, skip);
+
+			printf("The key is: ");
+			for(int i = 0; i < skip; i++) {
+				printf("%c", res[i]);
+			}
+			printf("\n");
+
+			free(res);
+			break;
+		}
+		default: {
+			printf("You didn't select a valid option, I don't know how you got here, but you did.\n");
+			break;
+		}
 	}
 
-	// char ch;
-	// letter_frequency *freq;
-	// letter_frequency max_frequency;
-	// long total;
-	// for(int i = 1; i <= skip; i++) {
-	// 	freq = do_frequency_analysis(chars, num_chars, (i - 1), skip, &total);
-	// 	max_frequency = get_highest_frequency(freq);
-
-	// 	ch = max_frequency.letter - 'E' + 'A';
-
-	// 	printf("%c", ch);
-		
-	// 	free(freq);
-	// }
-
+	system("pause");
 	free(chars);
-	free(res);
 
 	return 0;
 }
