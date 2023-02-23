@@ -1,10 +1,21 @@
-output: main.o key_cracker.o file_reader.o
-	gcc main.o key_cracker.o file_reader.o -o output
-main.o:
-	gcc -c main.c
-key_cracker.o:
-	gcc -c key_cracker.h key_cracker.c
-file_reader.o:
-	gcc -c file_reader.h file_reader.c
+CC = clang
+CFLAGS = -Wall -O2
+SRC = src
+OBJ = obj
+
+all: prog
+
+$(OBJ):
+	mkdir $@
+
+$(OBJ)/%.o: $(SRC)/%.c $(SRC)/%.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ)/%.o: $(SRC)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+prog: $(OBJ)/file_reader.o $(OBJ)/key_cracker.o $(OBJ)/decryption.o $(SRC)/main.c
+	$(CC) $(CFLAGS) -o $@ $^
+
 clean:
-	rm *.o *.exe *.h.gch
+	rm -f $(OBJ)/* prog

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "decryption.h"
 
 #ifndef KEY_CRACKER_H
 #define KEY_CRACKER_H
