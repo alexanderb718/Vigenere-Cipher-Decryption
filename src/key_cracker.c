@@ -60,20 +60,20 @@ float dictionary_frequency[] = {
 
 char get_most_likely_character(long *freq, long length, float *reference_percentage) {
 	float min_stddev = -1;
-	char min_char;
+	char min_char = '\0';
 
-	float percent;
+	// float percent = 0.0f;
 
-	float text_percent;
-	float current_percent;
+	float text_percent = 0.0f;
+	float current_percent = 0.0f;
 
-	float current_stddev;
+	float current_stddev = 0.0f;
 
 	int i, k;
 
 	float tmp;
 	for(k = 0; k < 26; k++) {
-		current_stddev = 0;
+		current_stddev = 0.0f;
 		for(i = 0; i < 26; i++) {
 			text_percent = reference_percentage[i];
 			current_percent = (float) freq[(i + k) % 26] / (float) length;
@@ -206,6 +206,9 @@ void run_analysis(char *chars, size_t length, int skip) {
 	printf("Key found by Text Frequency Analysis: %s\n", text);
 	printf("Key found by Dictionary Frequency Analysis: %s\n", dictionary);
 
+	decryptVigenereCipher(chars, max, "max_output.txt", length, skip);
+	decryptVigenereCipher(chars, text, "text_output.txt", length, skip);
+	decryptVigenereCipher(chars, dictionary, "dictionary_output.txt", length, skip);
 	free(max);
 	free(text);
 	free(dictionary);
